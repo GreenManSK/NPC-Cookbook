@@ -1,5 +1,6 @@
 import { TableType } from './TableType';
 import { ICharacter } from './Character';
+import { ITableTranslation } from './TableTranslation';
 
 export interface ITableManager {
     getTableSize( table: TableType ): number;
@@ -7,17 +8,24 @@ export interface ITableManager {
     getRandomValue( table: TableType ): number;
 
     randomizeCharacter( character: ICharacter ): ICharacter;
+
+    getText( table: TableType, value: number ): string;
 }
 
 export class TableManager implements ITableManager {
 
-    private nonStandardSizes = new Map<TableType, number>([
+    private readonly nonStandardSizes = new Map<TableType, number>([
         [TableType.Gender, 4],
         [TableType.Ideals1, 6],
         [TableType.Ideals2, 6],
         [TableType.UbranRural, 2],
         [TableType.SpecificOccupationD8, 8]
     ]);
+    private readonly tableTranslation: ITableTranslation;
+
+    constructor( tableTranslation: ITableTranslation ) {
+        this.tableTranslation = tableTranslation;
+    }
 
     public getRandomValue( table: TableType ): number {
         return Math.floor(Math.random() * this.getTableSize(table)) + 1;
@@ -32,6 +40,10 @@ export class TableManager implements ITableManager {
             character.setDataPoint(table as TableType, this.getRandomValue(table as TableType));
         }
         return character;
+    }
+
+    public getText( table: TableType, value: number ): string {
+        return this.tableTranslation.getText(table, value);
     }
 
 }

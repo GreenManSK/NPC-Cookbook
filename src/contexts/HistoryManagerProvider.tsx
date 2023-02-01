@@ -49,3 +49,4 @@ export const HistoryManagerProvider: React.FunctionComponent<Props> = React.memo
 
     return <HistoryManagerContext.Provider value={value}>{children}</HistoryManagerContext.Provider>
 });
+export const useHistoryManagerContext = () => React.useContext(HistoryManagerContext);
