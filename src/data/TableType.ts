@@ -3,6 +3,7 @@ export enum TableType {
     Gender,
     BodyType,
     HairColor,
+    Color,
     AccentColor,
     Appearance,
     HairStyle,
@@ -25,8 +26,37 @@ export enum TableType {
     Triggers,
 
     // Work
-    UbranRural,
+    UrbanRural,
     Occupation,
     SpecificOccupationD20,
     SpecificOccupationD8,
+}
+
+export enum Alignment {
+    General,
+    Good,
+    Lawful,
+    Neutral,
+    Evil,
+    Chaotic
+}
+
+export enum UrbanRural {
+    Urban,
+    Rural
+}
+
+export enum Occupation {
+    LesserNobility,
+    Religious,
+    LegalJudicial,
+    Military,
+    Academic,
+    MerchantsAndService1,
+    MerchantsAndService2,
+    MerchantsAndService3,
+    MerchantsAndService4,
+    Agriculture,
+    Entertainment,
+    ScoundrelsAndUnderclass
 }

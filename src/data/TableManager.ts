@@ -18,7 +18,7 @@ export class TableManager implements ITableManager {
         [TableType.Gender, 4],
         [TableType.Ideals1, 6],
         [TableType.Ideals2, 6],
-        [TableType.UbranRural, 2],
+        [TableType.UrbanRural, 2],
         [TableType.SpecificOccupationD8, 8]
     ]);
     private readonly tableTranslation: ITableTranslation;
