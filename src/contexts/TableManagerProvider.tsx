@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { TableManager } from '../data/TableManager';
 import { useLocalizationContext } from './LocalizationProvider';
 import { Localization } from '../translations/Localization';
@@ -6,15 +6,15 @@ import { TableTranslationSlovak } from '../translations/TableTranslationSlovak';
 import { TableTranslationEnglish } from '../translations/TableTranslationEnglish';
 
 export interface ITableManagerContext {
-    tableManager?: TableManager;
+    tableManager: TableManager;
 }
 
 export const TableManagerContext = React.createContext<ITableManagerContext>({
-    tableManager: undefined
+    tableManager: {} as TableManager
 })
 
 type Props = {
-    children: JSX.Element,
+    children: ReactNode,
 };
 
 const getTranslation = ( localization: Localization ) => {

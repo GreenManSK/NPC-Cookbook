@@ -1,5 +1,5 @@
-import React from 'react';
-import { ICharacter } from '../data/Character';
+import React, { ReactNode } from 'react';
+import { Character, ICharacter } from '../data/Character';
 
 export const HISTORY_LIMIT = 500;
 export const CHARACTER_LIMIT = 100;
@@ -20,15 +20,15 @@ export const HistoryManagerContext = React.createContext<IHistoryManagerContext>
 })
 
 type Props = {
-    children: JSX.Element,
+    children: ReactNode,
 };
 export const HistoryManagerProvider: React.FunctionComponent<Props> = React.memo(( {children} ) => {
     const [data, setData] = React.useState(() => {
         const rawCharacters = localStorage.getItem(CHARACTER_KEY) ?? '[]';
         const rawHistory = localStorage.getItem(HISTORY_KEY) ?? '[]';
         return {
-            characters: JSON.parse(rawCharacters) as ICharacter[],
-            history: JSON.parse(rawHistory) as ICharacter[],
+            characters: JSON.parse(rawCharacters).map(( o: any ) => Object.assign(new Character(), o)) as ICharacter[],
+            history: JSON.parse(rawHistory).map(( o: any ) => Object.assign(new Character(), o)) as ICharacter[],
         };
     });
 

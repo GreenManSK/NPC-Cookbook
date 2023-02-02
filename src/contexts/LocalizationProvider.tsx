@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Localization } from '../translations/Localization';
 
 export interface ILocalizationContext {
@@ -12,7 +12,7 @@ export const LocalizationContext = React.createContext<ILocalizationContext>({
 })
 
 type Props = {
-    children: JSX.Element,
+    children: ReactNode,
 };
 
 export const LocalizationProvider: React.FunctionComponent<Props> = React.memo(( {children} ) => {
