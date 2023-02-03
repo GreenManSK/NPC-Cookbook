@@ -37,8 +37,8 @@ export const HistoryManagerProvider: React.FunctionComponent<Props> = React.memo
             character.id = Math.max(0, ...data.characters.map(ch => ch.id ?? 0)) + 1;
         }
         character.timestamp = new Date().getTime();
-        const toSave = Object.assign(new Character(), {...character});
-        const newHistory = [...data.history, toSave].slice(-HISTORY_LIMIT);
+        const toSave = character.copy();
+        const newHistory = [...data.history, character].slice(-HISTORY_LIMIT);
         const newCharacters = [...data.characters.filter(ch => ch.id !== toSave.id), toSave].slice(-CHARACTER_LIMIT);
 
         localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));

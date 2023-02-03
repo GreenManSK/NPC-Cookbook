@@ -45,13 +45,13 @@ export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {c
     }, [save, tableManager]);
 
     const randomizeCharacter = React.useCallback(() => {
-        const character = Object.assign(new Character(), {...tableManager.randomizeCharacter(current)});
+        const character = tableManager.randomizeCharacter(current.copy());
         save(character);
         setCurrent(character);
     }, [current, save, tableManager]);
 
     const copyCurrent = React.useCallback(() => {
-        const character = Object.assign(new Character(), current);
+        const character = current.copy();
         character.id = undefined;
         save(character);
         setCurrent(character);

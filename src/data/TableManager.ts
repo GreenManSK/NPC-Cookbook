@@ -1,6 +1,6 @@
-import { TableType } from './TableType';
+import { Occupation, TableType, TableTypeHelper } from './TableType';
 import { ICharacter } from './Character';
-import { ITableTranslation } from './TableTranslation';
+import { ITableTranslation, TextData } from './TableTranslation';
 
 export interface ITableManager {
     getTableSize( table: TableType ): number;
@@ -10,6 +10,10 @@ export interface ITableManager {
     randomizeCharacter( character: ICharacter ): ICharacter;
 
     getText( table: TableType, value: number ): string;
+
+    getOccupation( urbanRuralRoll: number, occupationRoll: number ): Occupation;
+
+    getOccupationSize( occupation: Occupation ): number;
 }
 
 export class TableManager implements ITableManager {
@@ -42,8 +46,40 @@ export class TableManager implements ITableManager {
         return character;
     }
 
-    public getText( table: TableType, value: number ): string {
-        return this.tableTranslation.getText(table, value);
+    public getText( table: TableType, value: number, data?: TextData ): string {
+        return this.tableTranslation.getText(table, value, data);
     }
 
+    public getOccupation( urbanRuralRoll: number, occupationRoll: number ): Occupation {
+        return TableTypeHelper.getOccupation(urbanRuralRoll, occupationRoll);
+    }
+
+    public getOccupationSize( occupation: Occupation ): number {
+        switch (occupation) {
+            case Occupation.LesserNobility:
+                return 8;
+            case Occupation.Religious:
+                return 8;
+            case Occupation.LegalJudicial:
+                return 8;
+            case Occupation.Military:
+                return 20;
+            case Occupation.Academic:
+                return 20;
+            case Occupation.MerchantsAndService1:
+                return 20;
+            case Occupation.MerchantsAndService2:
+                return 20;
+            case Occupation.MerchantsAndService3:
+                return 20;
+            case Occupation.MerchantsAndService4:
+                return 20;
+            case Occupation.Agriculture:
+                return 20;
+            case Occupation.Entertainment:
+                return 20;
+            case Occupation.ScoundrelsAndUnderclass:
+                return 20;
+        }
+    }
 }

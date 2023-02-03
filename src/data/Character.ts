@@ -14,6 +14,8 @@ export interface ICharacter {
     encode(): string;
 
     decode( encodedData: string ): ICharacter;
+
+    copy(): ICharacter;
 }
 
 export class Character implements ICharacter {
@@ -41,8 +43,14 @@ export class Character implements ICharacter {
 
     public decode( encodedData: string ): ICharacter {
         const newCharacter = new Character();
-        newCharacter.data = Array.from(new Uint8Array(atob(encodedData).split("").map(c =>  c.charCodeAt(0))));
+        newCharacter.data = Array.from(new Uint8Array(atob(encodedData).split('').map(c => c.charCodeAt(0))));
         return newCharacter;
     }
 
+    public copy() {
+        return Object.assign(new Character(), {
+            ...this,
+            data: [...this.data]
+        });
+    }
 }
