@@ -11,7 +11,7 @@ export const HistoryList = React.memo(() => {
     const [page, setPage] = React.useState(1);
 
     const pageCount = Math.ceil(history.length / PAGE_SIZE);
-    const characters = React.useMemo(() => history.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [history, page])
+    const characters = React.useMemo(() => [...history].reverse().slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [history, page])
 
     const setFirstPage = React.useCallback(() => setPage(1), []);
     const setPrevPage = React.useCallback(() => setPage(page - 1), [page]);

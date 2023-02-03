@@ -3,13 +3,11 @@ import './App.css';
 import { TableManagerProvider } from './contexts/TableManagerProvider';
 import { LocalizationProvider } from './contexts/LocalizationProvider';
 import { LanguageSelector } from './components/LanguageSelector';
-import { HistoryManagerProvider, useHistoryManagerContext } from './contexts/HistoryManagerProvider';
-import { CharacterProvider, useCharacterContext } from './contexts/CharacterProvider';
-import { RandomizeButton } from './components/RandomizeButton';
-import { CharacterDisplay } from './components/CharacterDisplay';
+import { HistoryManagerProvider } from './contexts/HistoryManagerProvider';
+import { CharacterProvider } from './contexts/CharacterProvider';
 import { SavedCharactersList } from './components/SavedCharactersList';
 import { HistoryList } from './components/HistoryList';
-import { CopyButton } from './components/CopyButton';
+import { CharacterForm } from './components/CharacterForm';
 
 function App() {
     return (
@@ -18,9 +16,7 @@ function App() {
                 <HistoryManagerProvider>
                     <CharacterProvider>
                         <LanguageSelector/>
-                        <RandomizeButton/>
-                        <CopyButton/>
-                        <TestContent/>
+                        <CharacterForm/>
                         <SavedCharactersList/>
                         <HistoryList/>
                     </CharacterProvider>
@@ -29,13 +25,5 @@ function App() {
         </LocalizationProvider>
     );
 }
-
-const TestContent = React.memo(() => {
-    const {currentCharacter} = useCharacterContext();
-    const historyContext = useHistoryManagerContext();
-
-    console.log(currentCharacter, historyContext);
-    return <CharacterDisplay character={currentCharacter}/>;
-});
 
 export default App;

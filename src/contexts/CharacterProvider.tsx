@@ -28,7 +28,7 @@ type Props = {
 };
 
 export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {children} ) => {
-    const {history, save} = useHistoryManagerContext();
+    const {history, save, characters} = useHistoryManagerContext();
     const {tableManager} = useTableManagerContext();
 
     const [current, setCurrent] = React.useState(() => {
@@ -56,6 +56,13 @@ export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {c
         save(character);
         setCurrent(character);
     }, [current, save]);
+
+    React.useEffect(() => {
+        const contextCurrent = characters.filter(c => c.id === current.id)[0];
+        if (contextCurrent !== current) {
+            setCurrent(contextCurrent);
+        }
+    }, [characters, current]);
 
     const value = React.useMemo(() => ({
         currentCharacter: current, setCurrent, newCharacter, randomizeCharacter, copyCurrent
