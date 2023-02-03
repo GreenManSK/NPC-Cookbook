@@ -8,6 +8,7 @@ import { CharacterProvider, useCharacterContext } from './contexts/CharacterProv
 import { RandomizeButton } from './components/RandomizeButton';
 import { CharacterDisplay } from './components/CharacterDisplay';
 import { SavedCharactersList } from './components/SavedCharactersList';
+import { HistoryList } from './components/HistoryList';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                         <RandomizeButton/>
                         <TestContent/>
                         <SavedCharactersList/>
+                        <HistoryList/>
                     </CharacterProvider>
                 </HistoryManagerProvider>
             </TableManagerProvider>

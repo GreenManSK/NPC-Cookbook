@@ -10,7 +10,8 @@ export interface ICharacterListProps {
 export const CharacterList: React.FunctionComponent<ICharacterListProps>
     = React.memo(( {characters, clickCallback} ) => {
     return <>
-        {characters?.map(character => <CharacterDisplay character={character} clickCallback={clickCallback}
-                                                        key={character.id}/>)}
+        {characters?.map(( character, key ) =>
+            <CharacterDisplay character={character} clickCallback={clickCallback} key={key}/>
+        )}
     </>;
 });
