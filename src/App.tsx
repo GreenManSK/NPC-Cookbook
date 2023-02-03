@@ -9,6 +9,7 @@ import { RandomizeButton } from './components/RandomizeButton';
 import { CharacterDisplay } from './components/CharacterDisplay';
 import { SavedCharactersList } from './components/SavedCharactersList';
 import { HistoryList } from './components/HistoryList';
+import { CopyButton } from './components/CopyButton';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <CharacterProvider>
                         <LanguageSelector/>
                         <RandomizeButton/>
+                        <CopyButton/>
                         <TestContent/>
                         <SavedCharactersList/>
                         <HistoryList/>

@@ -8,6 +8,7 @@ export interface ICharacterContext {
     setCurrent: ( character: ICharacter ) => void;
     newCharacter: () => void;
     randomizeCharacter: () => void;
+    copyCurrent: () => void;
 }
 
 export const CharacterContext = React.createContext<ICharacterContext>({
@@ -17,6 +18,8 @@ export const CharacterContext = React.createContext<ICharacterContext>({
     newCharacter: () => {
     },
     randomizeCharacter: () => {
+    },
+    copyCurrent: () => {
     }
 });
 
@@ -47,9 +50,16 @@ export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {c
         setCurrent(character);
     }, [current, save, tableManager]);
 
+    const copyCurrent = React.useCallback(() => {
+        const character = Object.assign(new Character(), current);
+        character.id = undefined;
+        save(character);
+        setCurrent(character);
+    }, [current, save]);
+
     const value = React.useMemo(() => ({
-        currentCharacter: current, setCurrent, newCharacter, randomizeCharacter
-    }), [current, setCurrent, newCharacter, randomizeCharacter]);
+        currentCharacter: current, setCurrent, newCharacter, randomizeCharacter, copyCurrent
+    }), [current, setCurrent, newCharacter, randomizeCharacter, copyCurrent]);
 
     return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>
 });
