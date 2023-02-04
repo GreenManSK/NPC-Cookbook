@@ -5,6 +5,7 @@ import { useTableManagerContext } from '../contexts/TableManagerProvider';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { useHistoryManagerContext } from '../contexts/HistoryManagerProvider';
 import { TextData } from '../data/TableTranslation';
+import { GiRollingDices } from 'react-icons/gi';
 
 export interface ICharacterFieldProps {
     character: ICharacter;
@@ -63,9 +64,17 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
         setValue(parseInt(event.currentTarget.value));
     }, [wasEdited]);
 
+    const randomize = React.useCallback(() => {
+        wasEdited.current = true;
+        setValue(Math.floor(Math.random() * tableSize) + 1);
+    }, [wasEdited, tableSize]);
+
     if (!isEditable) {
         return <>{tableManager.getText(table, value, textData)}</>;
     }
 
-    return <select value={value} onChange={onChange}>{options}</select>;
+    return <>
+        <select value={value} onChange={onChange}>{options}</select>
+        <button onClick={randomize}><GiRollingDices/></button>
+    </>;
 });
