@@ -1,5 +1,5 @@
 import { Occupation, TableType, TableTypeHelper } from './TableType';
-import { ICharacter } from './Character';
+import { Character, ICharacter } from './Character';
 import { ITableTranslation, TextData } from './TableTranslation';
 
 export interface ITableManager {
@@ -14,6 +14,8 @@ export interface ITableManager {
     getOccupation( urbanRuralRoll: number, occupationRoll: number ): Occupation;
 
     getOccupationSize( occupation: Occupation ): number;
+
+    decodeCharacter( encodedData: string ): ICharacter;
 }
 
 export class TableManager implements ITableManager {
@@ -81,5 +83,17 @@ export class TableManager implements ITableManager {
             case Occupation.ScoundrelsAndUnderclass:
                 return 20;
         }
+    }
+
+    public decodeCharacter( encodedData: string ): ICharacter {
+        const character = new Character();
+        character.decode(encodedData);
+        for (const table of Object.values(TableType).filter(Number.isInteger)) {
+            const tableType = table as TableType;
+            let normalizeValue = Math.max(character.getDataPoint(tableType), 1);
+            normalizeValue = Math.min(character.getDataPoint(tableType), this.getTableSize(tableType));
+            character.setDataPoint(tableType, normalizeValue);
+        }
+        return character;
     }
 }

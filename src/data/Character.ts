@@ -42,9 +42,8 @@ export class Character implements ICharacter {
     }
 
     public decode( encodedData: string ): ICharacter {
-        const newCharacter = new Character();
-        newCharacter.data = Array.from(new Uint8Array(atob(encodedData).split('').map(c => c.charCodeAt(0))));
-        return newCharacter;
+        this.data = Array.from(new Uint8Array(atob(encodedData).split('').map(c => c.charCodeAt(0))));
+        return this;
     }
 
     public copy() {
