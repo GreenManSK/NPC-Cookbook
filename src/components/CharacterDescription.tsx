@@ -11,7 +11,7 @@ export const CharacterDescription = React.memo(() => {
     const {currentCharacter} = useCharacterContext();
     // TODO: Slovak
     return <div className="box character-description">
-        <strong>{currentCharacter.name}</strong><br/>
+        {currentCharacter.name ? (<><strong>{currentCharacter.name}</strong><br/></>) : ''}
         <strong>Appearance:</strong>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.BodyType}/>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Gender}/>
@@ -23,9 +23,9 @@ export const CharacterDescription = React.memo(() => {
         (and <CharacterField character={currentCharacter} table={TableType.FacialHair}/>).
         Wearing&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Color}/>
-        cloths with&nbsp;
+        &nbsp;cloths with&nbsp;
         <CharacterField character={currentCharacter} table={TableType.FashionStyle}/>&nbsp;
-        (<CharacterField character={currentCharacter} table={TableType.AccentColor}/>).
+        (<CharacterField character={currentCharacter} table={TableType.AccentColor}/>&nbsp;accents).
         <br/>
 
         <strong>Behavior:</strong>&nbsp;Interacts&nbsp;
