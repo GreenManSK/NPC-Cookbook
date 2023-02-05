@@ -72,3 +72,10 @@ button.form-button + button.form-button {
     font-size: 1.5rem;
 }
 
+.box {
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--main-line-color);
+    background: var(--bg-lighest);
+}

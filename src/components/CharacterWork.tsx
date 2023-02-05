@@ -23,6 +23,10 @@ export const CharacterWork: React.FC<ICharacterWorkProps> = React.memo(( props )
         [TableType.SpecificOccupationD8]: specificOccupationD8
     }), [urbanRural, occupation, specificOccupationD20, specificOccupationD8]);
 
+    if (!isEditable) {
+        return <CharacterOccupation character={character} isEditable={isEditable} textData={textData}/>;
+    }
+
     return <>
         <CharacterField character={character} table={TableType.UrbanRural} isEditable={isEditable}/>
         <CharacterField character={character} table={TableType.Occupation} isEditable={isEditable} textData={textData}/>

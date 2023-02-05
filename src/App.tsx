@@ -7,6 +7,7 @@ import { HistoryManagerProvider } from './contexts/HistoryManagerProvider';
 import { CharacterProvider } from './contexts/CharacterProvider';
 import { CharacterForm } from './components/CharacterForm';
 import { LeftPanel } from './components/LeftPanel';
+import { CharacterDescription } from './components/CharacterDescription';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                             <div className="app-content">
                                 <LanguageSelector/>
                                 <CharacterForm/>
+                                <CharacterDescription/>
                             </div>
                             <LeftPanel/>
                         </div>

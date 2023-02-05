@@ -13,8 +13,10 @@ export const CharacterAppearance: React.FC<ICharacterAppearanceProps> = React.me
 
     const isDisfigured = character.getDataPoint(TableType.Appearance) === 5;
 
+    // TODO: Slovak
     return <>
         <CharacterField character={character} table={TableType.Appearance} isEditable={isEditable}/>
+        {!isEditable ? ' of ' : ''}
         {isDisfigured ?
             <CharacterField character={character} table={TableType.Disfigured} isEditable={isEditable}/> : null}
     </>;

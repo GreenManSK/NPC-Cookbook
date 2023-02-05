@@ -23,7 +23,7 @@ export const CharacterForm = React.memo(() => {
 
     const copyCharacter = React.useCallback(() => navigator.clipboard.writeText(encodedCharacter), [encodedCharacter]);
 
-    return <div className="character-form">
+    return <div className="character-form box">
         <h1>Editor</h1>
         <div className="character-form-name">
             <CharacterNameInput character={currentCharacter}/>

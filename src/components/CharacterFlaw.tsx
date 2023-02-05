@@ -13,8 +13,10 @@ export const CharacterFlaw: React.FC<ICharacterFlawProps> = React.memo(( props )
 
     const hasTrigger = character.getDataPoint(TableType.Flaws) === 19;
 
+    // TODO: Slovak
     return <>
         <CharacterField character={character} table={TableType.Flaws} isEditable={isEditable}/>
+        {!isEditable ? ' of ' : ''}
         {hasTrigger ?
             <CharacterField character={character} table={TableType.Triggers} isEditable={isEditable}/> : null}
     </>;
