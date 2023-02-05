@@ -7,9 +7,10 @@ export const LanguageSelector: React.FunctionComponent = React.memo(() => {
     const {localization, setLocalization} = useLocalizationContext();
     const setToEnglish = React.useCallback(() => setLocalization(Localization.English), [setLocalization]);
     const setToSlovak = React.useCallback(() => setLocalization(Localization.Slovak), [setLocalization]);
-    return <div>
-        <button className={localization === Localization.English ? 'active' : ''} onClick={setToEnglish}>Englus</button>
-        |
-        <button className={localization === Localization.Slovak ? 'active' : ''} onClick={setToSlovak}>Slovak</button>
+    return <div className="language-selector">
+        {localization !== Localization.English ?
+            <button className="form-button" onClick={setToEnglish}>English</button> : null}
+        {localization !== Localization.Slovak ?
+            <button className="form-button" onClick={setToSlovak}>Slovak</button> : null}
     </div>;
 });

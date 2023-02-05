@@ -1,3 +1,5 @@
-.active {
-    font-weight: bold;
+.language-selector {
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
