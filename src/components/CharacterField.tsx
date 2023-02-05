@@ -1,11 +1,14 @@
 import React from 'react';
 import { ICharacter } from '../data/Character';
-import { TableType } from '../data/TableType';
+import { Color, TableType } from '../data/TableType';
 import { useTableManagerContext } from '../contexts/TableManagerProvider';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
 import { useHistoryManagerContext } from '../contexts/HistoryManagerProvider';
 import { TextData } from '../data/TableTranslation';
 import { GiRollingDices } from 'react-icons/gi';
+import Select, { SingleValue } from 'react-select';
+import { TableManager } from '../data/TableManager';
+import { characterFieldSelectStyles } from './CharacterField.style';
 
 export interface ICharacterFieldProps {
     character: ICharacter;
@@ -15,6 +18,24 @@ export interface ICharacterFieldProps {
 }
 
 const DEBOUNCE_TIME = 500;
+
+export type CharacterFieldOption = { value: number, label: string, color?: Color };
+
+const createOption = ( key: number, tableManager: TableManager, table: TableType, textData?: TextData ) => {
+    const value = key + 1;
+    const text = tableManager.getText(
+        table,
+        value,
+        table === TableType.SpecificOccupationD20 || table === TableType.SpecificOccupationD8 ?
+            {
+                ...textData,
+                [TableType.SpecificOccupationD20]: value,
+                [TableType.SpecificOccupationD8]: value
+            }
+            : textData
+    );
+    return {value, label: `${value}. ${text}`, color: tableManager.getColor(table, value)};
+}
 
 export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props ) => {
     const {character, table, isEditable, textData} = props;
@@ -41,27 +62,14 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
 
     const tableSize = tableManager.getTableSize(table);
     const options = React.useMemo(() =>
-            [...Array(tableSize)].map(( _, key ) => {
-                const value = key + 1;
-                const text = tableManager.getText(
-                    table,
-                    value,
-                    table === TableType.SpecificOccupationD20 || table === TableType.SpecificOccupationD8 ?
-                        {
-                            ...textData,
-                            [TableType.SpecificOccupationD20]: value,
-                            [TableType.SpecificOccupationD8]: value
-                        }
-                        : textData
-                );
-                return <option key={key} value={value}>{`${value}. ${text}`}</option>;
-            }),
+            [...Array(tableSize)].map(( _, key ) => createOption(key, tableManager, table, textData)),
         [table, tableManager, tableSize, textData]);
 
-
-    const onChange = React.useCallback(( event: React.FormEvent<HTMLSelectElement> ) => {
+    const onChange = React.useCallback(( newValue: SingleValue<CharacterFieldOption> ) => {
+        if (!newValue)
+            return;
         wasEdited.current = true;
-        setValue(parseInt(event.currentTarget.value));
+        setValue(newValue.value);
     }, [wasEdited]);
 
     const randomize = React.useCallback(() => {
@@ -74,7 +82,13 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
     }
 
     return <>
-        <select value={value} onChange={onChange}>{options}</select>
+        <Select
+            options={options}
+            value={options[value - 1]}
+            onChange={onChange}
+            styles={characterFieldSelectStyles}
+            isMulti={false}
+        />
         <button onClick={randomize}><GiRollingDices/></button>
     </>;
 });

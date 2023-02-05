@@ -1,4 +1,4 @@
-import { Occupation, TableType, TableTypeHelper } from './TableType';
+import { Color, Occupation, TableType, TableTypeHelper } from './TableType';
 import { Character, ICharacter } from './Character';
 import { ITableTranslation, TextData } from './TableTranslation';
 
@@ -16,6 +16,8 @@ export interface ITableManager {
     getOccupationSize( occupation: Occupation ): number;
 
     decodeCharacter( encodedData: string ): ICharacter;
+
+    getColor( table: TableType, value: number ): Color | undefined;
 }
 
 export class TableManager implements ITableManager {
@@ -96,4 +98,9 @@ export class TableManager implements ITableManager {
         }
         return character;
     }
+
+    public getColor( table: TableType, value: number ): Color | undefined {
+        return TableTypeHelper.getColor(table, value);
+    }
+
 }

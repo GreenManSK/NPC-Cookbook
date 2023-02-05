@@ -61,6 +61,68 @@ export enum Occupation {
     ScoundrelsAndUnderclass
 }
 
+export enum Color {
+    White,
+    Black,
+    PlatinumBlonde,
+    GoldenBlonde,
+    CopperBlonde,
+    Flaxen,
+    AshBrown,
+    LightBrown,
+    MouseBrown,
+    DarkBrown,
+    BlackBrown,
+    RavinBlack,
+    Mahogany,
+    AuburnBrown,
+    CherryBrown,
+    CopperBrown,
+    Auburn,
+    Burgandy,
+    CherryRed,
+    FoxRed,
+    GignerRed,
+    StormGrey,
+    LightGrey,
+    ChesnutBrown,
+    WalnutBrown,
+    RussetBrown,
+    Burgundy,
+    Rose,
+    Fuchsia,
+    Violet,
+    RoyaleBlue,
+    SkyBlue,
+    Teal,
+    PineGreen,
+    BrightGreen,
+    PaleGreen,
+    LimeGreen,
+    Yellow,
+    Orange,
+    Red,
+    ClayGreen,
+    OliveDrab,
+    Amber,
+    Gold,
+    Silver,
+    Jade,
+    Bronze,
+    Copper,
+    Emerald,
+    VibrantGreen,
+    Tangerine,
+    PepperRed,
+    PastelBlue,
+    Ruby,
+    Lavander,
+    Saphire,
+    Azure,
+    Cyan,
+    Turquoise,
+}
+
 export class TableTypeHelper {
     private static ALIGNMENT_FOR_IDEAL1 = [
         Alignment.Lawful,
@@ -150,6 +212,72 @@ export class TableTypeHelper {
         Occupation.Entertainment,
         Occupation.ScoundrelsAndUnderclass,
     ];
+    private static HAIR_COLORS = [
+        Color.White,
+        Color.PlatinumBlonde,
+        Color.GoldenBlonde,
+        Color.CopperBlonde,
+        Color.Flaxen,
+        Color.AshBrown,
+        Color.LightBrown,
+        Color.MouseBrown,
+        Color.DarkBrown,
+        Color.BlackBrown,
+        Color.RavinBlack,
+        Color.Mahogany,
+        Color.AuburnBrown,
+        Color.CherryBrown,
+        Color.CopperBrown,
+        Color.Auburn,
+        Color.Burgandy,
+        Color.CherryRed,
+        Color.FoxRed,
+        Color.GignerRed,
+    ];
+    private static COLOR_COLORS = [
+        Color.Black,
+        Color.StormGrey,
+        Color.LightGrey,
+        Color.ChesnutBrown,
+        Color.WalnutBrown,
+        Color.RussetBrown,
+        Color.Burgundy,
+        Color.Rose,
+        Color.Fuchsia,
+        Color.Violet,
+        Color.RoyaleBlue,
+        Color.SkyBlue,
+        Color.Teal,
+        Color.PineGreen,
+        Color.BrightGreen,
+        Color.PaleGreen,
+        Color.LimeGreen,
+        Color.Yellow,
+        Color.Orange,
+        Color.Red,
+    ];
+    private static ACCENT_COLORS = [
+        Color.White,
+        Color.ClayGreen,
+        Color.OliveDrab,
+        Color.Amber,
+        Color.Gold,
+        Color.Silver,
+        Color.Jade,
+        Color.Bronze,
+        Color.Copper,
+        Color.Emerald,
+        Color.VibrantGreen,
+        Color.Tangerine,
+        Color.PepperRed,
+        Color.PastelBlue,
+        Color.Ruby,
+        Color.Lavander,
+        Color.Saphire,
+        Color.Azure,
+        Color.Cyan,
+        Color.Turquoise,
+    ];
 
     private constructor() {
     }
@@ -166,5 +294,19 @@ export class TableTypeHelper {
         const urbanRural = urbanRuralRoll === 1 ? UrbanRural.Urban : UrbanRural.Rural;
         const occupationValue = occupationRoll - 1;
         return urbanRural === UrbanRural.Urban ? TableTypeHelper.URBAN_OCCUPATIONS[occupationValue] : TableTypeHelper.RURAL_OCCUPATIONS[occupationValue];
+    }
+
+    public static getColor( table: TableType, value: number ): Color | undefined {
+        value -= 1;
+        if (table === TableType.Color) {
+            return TableTypeHelper.COLOR_COLORS[value];
+        }
+        if (table === TableType.HairColor) {
+            return TableTypeHelper.HAIR_COLORS[value];
+        }
+        if (table === TableType.AccentColor) {
+            return TableTypeHelper.ACCENT_COLORS[value];
+        }
+        return undefined;
     }
 }
