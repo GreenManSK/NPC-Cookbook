@@ -35,7 +35,9 @@ export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {c
         if (history.length > 0) {
             return history[history.length - 1];
         }
-        return tableManager.randomizeCharacter(new Character());
+        const character = tableManager.randomizeCharacter(new Character());
+        save(character);
+        return character;
     });
 
     const newCharacter = React.useCallback(() => {
@@ -59,7 +61,7 @@ export const CharacterProvider: React.FunctionComponent<Props> = React.memo(( {c
 
     React.useEffect(() => {
         const contextCurrent = characters.filter(c => c.id === current.id)[0];
-        if (contextCurrent !== current) {
+        if (contextCurrent !== current && contextCurrent) {
             setCurrent(contextCurrent);
         }
     }, [characters, current]);

@@ -90,6 +90,7 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
             onChange={onChange}
             styles={characterFieldSelectStyles}
             isMulti={false}
+            isSearchable={false}
         />
         <button onClick={randomize} className="form-button"><GiRollingDices/></button>
     </div>;

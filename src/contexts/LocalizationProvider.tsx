@@ -20,7 +20,7 @@ export const LOCALIZATION_KEY = 'localization';
 
 export const LocalizationProvider: React.FunctionComponent<Props> = React.memo(( {children} ) => {
     const [localization, setLocalization] = React.useState<Localization>(() => {
-        const localLocalization = parseInt(localStorage.getItem(LOCALIZATION_KEY) ?? '1');
+        const localLocalization = parseInt(localStorage.getItem(LOCALIZATION_KEY) ?? '0');
         return (!isNaN(localLocalization) && localLocalization) ? (localLocalization as Localization) : Localization.English;
     });
     const setLocalizationCallback = React.useCallback(( localization: Localization ) => {
