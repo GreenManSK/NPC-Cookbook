@@ -146,15 +146,8 @@ const dot = ( color?: Color ) => (color !== undefined ? {
 export const characterFieldSelectStyles: StylesConfig<CharacterFieldOption> = {
     container: ( baseStyles ) => ({
         ...baseStyles,
-        display: 'inline-block'
-    }),
-    control: ( baseStyles, state ) => ({
-        ...baseStyles,
-        width: `${state.getValue()[0].label.length + 2}em`
-    }),
-    menu: ( baseStyles, state ) => ({
-        ...baseStyles,
-        width: `${state.getValue()[0].label.length + 2}em`
+        display: 'inline-block',
+        flexGrow: 100
     }),
     singleValue: ( styles, {data} ) => ({...styles, ...dot(data.color)}),
     option: ( styles, {data} ) => ({...styles, ...dot(data.color)})

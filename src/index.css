@@ -64,3 +64,11 @@ button.form-button:first-child,
 button.form-button + button.form-button {
     border-left: none;
 }
+
+.form-input {
+    height: 3rem;
+    border-radius: 0;
+    border: 1px solid var(--main-line-color);
+    font-size: 1.5rem;
+}
+

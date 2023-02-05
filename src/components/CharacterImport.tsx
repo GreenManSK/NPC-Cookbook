@@ -25,7 +25,7 @@ export const CharacterImport = React.memo(() => {
     }, [setValue, value, save, setCurrent, tableManager]);
 
     return <div className="character-import">
-        <input type="text" value={value} onChange={onChange} placeholder="Import character..."/>
+        <input className="form-input" type="text" value={value} onChange={onChange} placeholder="Import character..."/>
         <button onClick={importCharacter} className="form-button"><BiImport/></button>
     </div>;
 });

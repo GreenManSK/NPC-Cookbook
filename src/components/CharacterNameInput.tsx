@@ -32,8 +32,6 @@ export const CharacterNameInput: React.FunctionComponent<ICharacterNameInputProp
         setName(event.currentTarget.value);
     }, [wasEdited]);
 
-    return <>
-        <strong>Name:</strong>
-        <input type="text" value={name} onChange={onChange}/>
-    </>;
+    return <input className="form-input character-name" type="text" value={name} onChange={onChange}
+                  placeholder="Character name..."/>;
 });

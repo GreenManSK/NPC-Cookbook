@@ -9,6 +9,7 @@ import { GiRollingDices } from 'react-icons/gi';
 import Select, { SingleValue } from 'react-select';
 import { TableManager } from '../data/TableManager';
 import { characterFieldSelectStyles } from './CharacterField.style';
+import './CharacterField.css';
 
 export interface ICharacterFieldProps {
     character: ICharacter;
@@ -81,7 +82,8 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
         return <>{tableManager.getText(table, value, textData)}</>;
     }
 
-    return <>
+    return <div className="character-field">
+        <span className="character-field-label">{TableType[table]}:</span>
         <Select
             options={options}
             value={options[value - 1]}
@@ -89,6 +91,6 @@ export const CharacterField: React.FC<ICharacterFieldProps> = React.memo(( props
             styles={characterFieldSelectStyles}
             isMulti={false}
         />
-        <button onClick={randomize}><GiRollingDices/></button>
-    </>;
+        <button onClick={randomize} className="form-button"><GiRollingDices/></button>
+    </div>;
 });

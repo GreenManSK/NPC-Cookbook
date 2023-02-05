@@ -2,12 +2,8 @@
     display: flex;
 }
 
-.character-import input[type=text] {
-    flex-grow: 100;
-    height: 3rem;
-    border-radius: 0;
-    border: 1px solid var(--main-line-color);
+.character-import .form-input {
     border-left: none;
     border-right: none;
-    font-size: 1.5rem;
+    flex-grow: 100;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useCharacterContext } from '../contexts/CharacterProvider';
-import { CharacterDisplay } from './CharacterDisplay';
 import { RandomizeButton } from './RandomizeButton';
 import { CopyButton } from './CopyButton';
 import { CharacterNameInput } from './CharacterNameInput';
@@ -10,44 +9,103 @@ import { CharacterAppearance } from './CharacterAppearance';
 import { CharacterIdeal } from './CharacterIdeal';
 import { CharacterWork } from './CharacterWork';
 import { CharacterFlaw } from './CharacterFlaw';
+import './CharacterForm.css';
+import { MdFace, MdFileCopy, MdWork } from 'react-icons/md';
+import { IoIosBody } from 'react-icons/io';
+import { GiAmpleDress, GiScales } from 'react-icons/gi';
+import { HiOutlineChatBubbleBottomCenterText } from 'react-icons/hi2';
 
 export const CharacterForm = React.memo(() => {
     const {currentCharacter} = useCharacterContext();
 
     const isEditable = true;
+    const encodedCharacter = currentCharacter.encode();
 
-    return <div>
-        <h1>Character</h1>
-        <CharacterNameInput character={currentCharacter}/>
-        <RandomizeButton/>
-        <CopyButton/>
-        <CharacterDisplay character={currentCharacter}/>
+    const copyCharacter = React.useCallback(() => navigator.clipboard.writeText(encodedCharacter), [encodedCharacter]);
 
-        <h2>Appearance</h2>
-        <CharacterField character={currentCharacter} table={TableType.Gender} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.BodyType} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.HairColor} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.Color} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.AccentColor} isEditable={isEditable}/>
-        <CharacterAppearance character={currentCharacter} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.HairStyle} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.FacialHair} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.FashionStyle} isEditable={isEditable}/>
+    return <div className="character-form">
+        <h1>Editor</h1>
+        <div className="character-form-name">
+            <CharacterNameInput character={currentCharacter}/>
+            <CopyButton/>
+            <RandomizeButton/>
+        </div>
+        <div className="character-form-encoded">
+            {`${encodedCharacter}`}
+            <button onClick={copyCharacter} title="Copy encoded version"><MdFileCopy/></button>
+        </div>
 
-        <h2>Behaviour</h2>
-        <CharacterField character={currentCharacter} table={TableType.InteractionTraits} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.Mannerism} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.PersonalityTraits} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.Talents} isEditable={isEditable}/>
-
-        <h2>Personality</h2>
-        <CharacterField character={currentCharacter} table={TableType.Alignment} isEditable={isEditable}/>
-        <CharacterIdeal character={currentCharacter} table={TableType.Ideals1} isEditable={isEditable}/>
-        <CharacterIdeal character={currentCharacter} table={TableType.Ideals2} isEditable={isEditable}/>
-        <CharacterField character={currentCharacter} table={TableType.Bonds} isEditable={isEditable}/>
-        <CharacterFlaw character={currentCharacter} isEditable={isEditable}/>
-
-        <h2>Work</h2>
-        <CharacterWork character={currentCharacter} isEditable={isEditable}/>
+        <div className="character-form-blocks">
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><IoIosBody/></span>
+                    <strong>Body</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterField character={currentCharacter} table={TableType.Gender} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.BodyType} isEditable={isEditable}/>
+                    <CharacterAppearance character={currentCharacter} isEditable={isEditable}/>
+                </div>
+            </div>
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><MdFace/></span>
+                    <strong>Hair</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterField character={currentCharacter} table={TableType.HairStyle} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.HairColor} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.FacialHair} isEditable={isEditable}/>
+                </div>
+            </div>
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><GiAmpleDress/></span>
+                    <strong>Fashion</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterField character={currentCharacter} table={TableType.FashionStyle}
+                                    isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.Color} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.AccentColor} isEditable={isEditable}/>
+                </div>
+            </div>
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><HiOutlineChatBubbleBottomCenterText/></span>
+                    <strong>Behaviour</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterField character={currentCharacter} table={TableType.InteractionTraits}
+                                    isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.Mannerism} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.PersonalityTraits}
+                                    isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.Talents} isEditable={isEditable}/>
+                </div>
+            </div>
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><GiScales/></span>
+                    <strong>Personality</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterField character={currentCharacter} table={TableType.Alignment} isEditable={isEditable}/>
+                    <CharacterIdeal character={currentCharacter} table={TableType.Ideals1} isEditable={isEditable}/>
+                    <CharacterIdeal character={currentCharacter} table={TableType.Ideals2} isEditable={isEditable}/>
+                    <CharacterField character={currentCharacter} table={TableType.Bonds} isEditable={isEditable}/>
+                    <CharacterFlaw character={currentCharacter} isEditable={isEditable}/>
+                </div>
+            </div>
+            <div className="character-form-block">
+                <div className="character-form-block-icon">
+                    <span><MdWork/></span>
+                    <strong>Work</strong>
+                </div>
+                <div className="character-form-block-selects">
+                    <CharacterWork character={currentCharacter} isEditable={isEditable}/>
+                </div>
+            </div>
+        </div>
     </div>;
 })
