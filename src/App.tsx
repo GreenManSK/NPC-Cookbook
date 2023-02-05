@@ -5,9 +5,8 @@ import { LocalizationProvider } from './contexts/LocalizationProvider';
 import { LanguageSelector } from './components/LanguageSelector';
 import { HistoryManagerProvider } from './contexts/HistoryManagerProvider';
 import { CharacterProvider } from './contexts/CharacterProvider';
-import { SavedCharactersList } from './components/SavedCharactersList';
-import { HistoryList } from './components/HistoryList';
 import { CharacterForm } from './components/CharacterForm';
+import { LeftPanel } from './components/LeftPanel';
 
 function App() {
     return (
@@ -15,10 +14,13 @@ function App() {
             <TableManagerProvider>
                 <HistoryManagerProvider>
                     <CharacterProvider>
-                        <LanguageSelector/>
-                        <CharacterForm/>
-                        <SavedCharactersList/>
-                        <HistoryList/>
+                        <div className="app-container">
+                            <div className="app-content">
+                                <LanguageSelector/>
+                                <CharacterForm/>
+                            </div>
+                            <LeftPanel/>
+                        </div>
                     </CharacterProvider>
                 </HistoryManagerProvider>
             </TableManagerProvider>

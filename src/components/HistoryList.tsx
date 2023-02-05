@@ -2,8 +2,10 @@ import React from 'react';
 import { useHistoryManagerContext } from '../contexts/HistoryManagerProvider';
 import { CharacterList } from './CharacterList';
 import { useCharacterContext } from '../contexts/CharacterProvider';
+import './HistoryList.css';
+import { HiChevronDoubleLeft, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 50;
 
 export const HistoryList = React.memo(() => {
     const {history} = useHistoryManagerContext();
@@ -18,11 +20,13 @@ export const HistoryList = React.memo(() => {
     const setNextPage = React.useCallback(() => setPage(page + 1), [page]);
 
     return <>
-        <h1>History</h1>
         <CharacterList characters={characters} clickCallback={setCurrent}/>
-        <button disabled={page === 1} onClick={setFirstPage}>First</button>
-        <button disabled={page === 1} onClick={setPrevPage}>Prev</button>
-        {page} / {pageCount}
-        <button disabled={page === pageCount} onClick={setNextPage}>Next</button>
+        <div className="history-pagination">
+            <button disabled={page === 1} onClick={setFirstPage} className="form-button"><HiChevronDoubleLeft/></button>
+            <button disabled={page === 1} onClick={setPrevPage} className="form-button"><HiChevronLeft/></button>
+            <span>{page} / {pageCount}</span>
+            <button disabled={page === pageCount} onClick={setNextPage} className="form-button"><HiChevronRight/>
+            </button>
+        </div>
     </>;
 });

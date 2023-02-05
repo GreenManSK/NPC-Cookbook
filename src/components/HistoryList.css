@@ -1,0 +1,11 @@
+.history-pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history-pagination span {
+    flex-grow: 100;
+    text-align: center;
+    font-size: 2rem;
+}

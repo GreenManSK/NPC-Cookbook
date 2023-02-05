@@ -1,0 +1,26 @@
+.character-display {
+    display: block;
+    width: 100%;
+    text-align: left;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none;
+    border-bottom: 1px solid var(--main-line-color);
+    cursor: pointer;
+    padding: .2rem .5rem;
+    background: transparent;
+    font-size: 1.5rem;
+}
+
+.character-display:nth-child(even) {
+    background: var(--bg-normal);
+}
+
+.character-display:hover, .character-display:focus {
+    background: var(--bg-light);
+}
+
+.character-display:active {
+    background: var(--bg-darker);
+}

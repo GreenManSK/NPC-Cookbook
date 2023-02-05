@@ -1,13 +1,66 @@
+:root {
+    --main-bg-color: #fffcf3;
+    --main-text-color: #353C40;
+
+    --main-line-color: #575958;
+    --main-line-secndary-color: #8C877D;
+
+    --main-color: #732634;
+    --secondary-color: #8C2641;
+
+    --bg-lighest: #F9F5E7;
+    --bg-light: #F8EAD8;
+    --bg-normal: #EDDBC7;
+    --bg-darker: #A7727D;
+
+    --panel-width: 35rem;
+}
+
+html {
+    font-size: 62.5%;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--main-bg-color);
+    color: var(--main-text-color);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button.form-button {
+    flex: 0 0 3.5rem;
+    font-size: 1.7rem;
+    vertical-align: middle;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--main-line-color);
+    cursor: pointer;
+    background: var(--bg-light);
+    min-height: 2.5rem;
+}
+
+button.form-button:hover:not([disabled]), button.form-button:focus:not([disabled]) {
+    color: var(--main-color);
+    background: var(--bg-normal);
+}
+
+button.form-button:active:not([disabled]) {
+    color: var(--secondary-color);
+    background: var(--bg-darker);
+}
+
+button.form-button:first-child,
+button.form-button + button.form-button {
+    border-left: none;
 }

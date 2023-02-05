@@ -1,0 +1,5 @@
+.character-list {
+    flex-grow: 100;
+    overflow-y: scroll;
+    width: var(--panel-width);
+}

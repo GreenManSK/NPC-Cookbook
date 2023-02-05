@@ -2,6 +2,8 @@ import React from 'react';
 import { useTableManagerContext } from '../contexts/TableManagerProvider';
 import { useCharacterContext } from '../contexts/CharacterProvider';
 import { useHistoryManagerContext } from '../contexts/HistoryManagerProvider';
+import './CharacterImport.css';
+import { BiImport } from 'react-icons/bi';
 
 export const CharacterImport = React.memo(() => {
     const {tableManager} = useTableManagerContext();
@@ -22,8 +24,8 @@ export const CharacterImport = React.memo(() => {
         setValue('');
     }, [setValue, value, save, setCurrent, tableManager]);
 
-    return <>
-        <input type="text" value={value} onChange={onChange}/>
-        <button onClick={importCharacter}>Import</button>
-    </>;
+    return <div className="character-import">
+        <input type="text" value={value} onChange={onChange} placeholder="Import character..."/>
+        <button onClick={importCharacter} className="form-button"><BiImport/></button>
+    </div>;
 });
