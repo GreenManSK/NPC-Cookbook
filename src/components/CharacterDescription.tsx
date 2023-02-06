@@ -9,11 +9,15 @@ import { CharacterAppearance } from './CharacterAppearance';
 
 export const CharacterDescription = React.memo(() => {
     const {currentCharacter} = useCharacterContext();
+
+    const gender = currentCharacter.getDataPoint(TableType.Gender);
+    const genderedTextData = React.useMemo(() => ({[TableType.Gender]: gender}), [gender])
+
     // TODO: Slovak
     return <div className="box character-description">
         {currentCharacter.name ? (<><strong>{currentCharacter.name}</strong><br/></>) : ''}
         <strong>Appearance:</strong>&nbsp;
-        <CharacterField character={currentCharacter} table={TableType.BodyType}/>&nbsp;
+        <CharacterField character={currentCharacter} table={TableType.BodyType} textData={genderedTextData}/>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Gender}/>
         &nbsp;with&nbsp;
         <CharacterAppearance character={currentCharacter}/>,&nbsp;
@@ -23,13 +27,13 @@ export const CharacterDescription = React.memo(() => {
         (and <CharacterField character={currentCharacter} table={TableType.FacialHair}/>).
         Wearing&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Color}/>
-        &nbsp;cloths with&nbsp;
+        &nbsp;with&nbsp;
         <CharacterField character={currentCharacter} table={TableType.FashionStyle}/>&nbsp;
         (<CharacterField character={currentCharacter} table={TableType.AccentColor}/>&nbsp;accents).
         <br/>
 
         <strong>Behavior:</strong>&nbsp;Interacts&nbsp;
-        <CharacterField character={currentCharacter} table={TableType.InteractionTraits}/>
+        <CharacterField character={currentCharacter} table={TableType.InteractionTraits} textData={genderedTextData}/>
         &nbsp;and does&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Mannerism}/>.&nbsp;
         Is <CharacterField character={currentCharacter} table={TableType.PersonalityTraits}/> with talent in&nbsp;

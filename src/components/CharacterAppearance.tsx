@@ -13,11 +13,15 @@ export const CharacterAppearance: React.FC<ICharacterAppearanceProps> = React.me
 
     const isDisfigured = character.getDataPoint(TableType.Appearance) === 5;
 
+    const gender = character.getDataPoint(TableType.Gender);
+    const genderedTextData = React.useMemo(() => ({[TableType.Gender]: gender}), [gender])
+
     // TODO: Slovak
     return <>
         <CharacterField character={character} table={TableType.Appearance} isEditable={isEditable}/>
-        {!isEditable ? ' of ' : ''}
+        {!isEditable && isDisfigured ? ' of ' : ''}
         {isDisfigured ?
-            <CharacterField character={character} table={TableType.Disfigured} isEditable={isEditable}/> : null}
+            <CharacterField character={character} table={TableType.Disfigured} isEditable={isEditable}
+                            textData={genderedTextData}/> : null}
     </>;
 });
