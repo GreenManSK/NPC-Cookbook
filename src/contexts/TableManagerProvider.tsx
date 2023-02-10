@@ -1,9 +1,6 @@
 import React, { ReactNode } from 'react';
 import { TableManager } from '../data/TableManager';
 import { useLocalizationContext } from './LocalizationProvider';
-import { Localization } from '../translations/Localization';
-import { TableTranslationSlovak } from '../translations/TableTranslationSlovak';
-import { TableTranslationEnglish } from '../translations/TableTranslationEnglish';
 
 export interface ITableManagerContext {
     tableManager: TableManager;
@@ -17,20 +14,11 @@ type Props = {
     children: ReactNode,
 };
 
-const getTranslation = ( localization: Localization ) => {
-    switch (localization) {
-        case Localization.Slovak:
-            return new TableTranslationSlovak();
-        default:
-            return new TableTranslationEnglish();
-    }
-}
-
 export const TableManagerProvider: React.FunctionComponent<Props> = React.memo(( {children} ) => {
-    const {localization} = useLocalizationContext();
+    const {translator} = useLocalizationContext();
     const value = React.useMemo(() => ({
-        tableManager: new TableManager(getTranslation(localization))
-    }), [localization])
+        tableManager: new TableManager(translator)
+    }), [translator])
     return <TableManagerContext.Provider value={value}>{children}</TableManagerContext.Provider>
 });
 

@@ -5,6 +5,8 @@ export type TextData = { [key: number]: number };
 
 export interface ITableTranslation {
     getText( table: TableType, value: number, data?: TextData ): string;
+
+    getStaticText( englishText: string, context?: string ): string;
 }
 
 export abstract class TableTranslationBase implements ITableTranslation {
@@ -38,6 +40,10 @@ export abstract class TableTranslationBase implements ITableTranslation {
             translation = this.getTranslationTable().get(table)?.[value];
         }
         return translation ?? 'Missing translation';
+    }
+
+    public getStaticText( englishText: string, context?: string ): string {
+        return englishText;
     }
 
     protected abstract getTranslationTable(): Map<TableType, string[]>;

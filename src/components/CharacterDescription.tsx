@@ -6,9 +6,11 @@ import { CharacterField } from './CharacterField';
 import { CharacterFlaw } from './CharacterFlaw';
 import { CharacterWork } from './CharacterWork';
 import { CharacterAppearance } from './CharacterAppearance';
+import { useLocalizationContext } from '../contexts/LocalizationProvider';
 
 export const CharacterDescription = React.memo(() => {
     const {currentCharacter} = useCharacterContext();
+    const {translator} = useLocalizationContext();
 
     const gender = currentCharacter.getDataPoint(TableType.Gender);
     const genderedTextData = React.useMemo(() => ({[TableType.Gender]: gender}), [gender])
@@ -16,31 +18,32 @@ export const CharacterDescription = React.memo(() => {
     // TODO: Slovak
     return <div className="box character-description">
         {currentCharacter.name ? (<><strong>{currentCharacter.name}</strong><br/></>) : ''}
-        <strong>Appearance:</strong>&nbsp;
+        <strong>{translator.getStaticText('Appearance:')}</strong>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.BodyType} textData={genderedTextData}/>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Gender}/>
-        &nbsp;with&nbsp;
+        &nbsp;{translator.getStaticText('with')}&nbsp;
         <CharacterAppearance character={currentCharacter}/>,&nbsp;
         <CharacterField character={currentCharacter} table={TableType.HairStyle}/>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.HairColor}/>
-        &nbsp;hair
-        (and <CharacterField character={currentCharacter} table={TableType.FacialHair}/>).
-        Wearing&nbsp;
+        &nbsp;{translator.getStaticText('hair')}&nbsp;
+        ({translator.getStaticText('and')} <CharacterField character={currentCharacter} table={TableType.FacialHair}/>).
+        &nbsp;{translator.getStaticText('Wearing')}&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Color}/>
-        &nbsp;with&nbsp;
         <CharacterField character={currentCharacter} table={TableType.FashionStyle}/>&nbsp;
-        (<CharacterField character={currentCharacter} table={TableType.AccentColor}/>&nbsp;accents).
+        (<CharacterField character={currentCharacter}
+                         table={TableType.AccentColor}/>&nbsp;{translator.getStaticText('doplnky')}).
         <br/>
 
-        <strong>Behavior:</strong>&nbsp;Interacts&nbsp;
+        <strong>{translator.getStaticText('Behavior')}:</strong>&nbsp;
         <CharacterField character={currentCharacter} table={TableType.InteractionTraits} textData={genderedTextData}/>
-        &nbsp;and does&nbsp;
+        &nbsp;{translator.getStaticText('and')}&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Mannerism}/>.&nbsp;
-        Is <CharacterField character={currentCharacter} table={TableType.PersonalityTraits}/> with talent in&nbsp;
+        {translator.getStaticText('Is')} <CharacterField character={currentCharacter}
+                                                         table={TableType.PersonalityTraits}/> {translator.getStaticText('with talent in')}&nbsp;
         <CharacterField character={currentCharacter} table={TableType.Talents}/>.
 
         <br/>
-        <strong>Work:</strong>&nbsp;<CharacterWork character={currentCharacter}/><br/>
+        <strong>{translator.getStaticText('Work')}:</strong>&nbsp;<CharacterWork character={currentCharacter}/><br/>
         <strong>Alignment:</strong>&nbsp;<CharacterField character={currentCharacter} table={TableType.Alignment}
     /><br/>
         <strong>Ideals:</strong>&nbsp;

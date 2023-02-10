@@ -47,7 +47,7 @@ export class TableTranslationEnglish extends TableTranslationBase {
             'burgandy',
             'cherry red',
             'fox red',
-            'inger red '
+            'inger red'
         ]],
         [TableType.Color, [
             'black',
